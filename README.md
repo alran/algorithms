@@ -4,6 +4,8 @@
 
 ### [Insertion Sort](/algorithms/pages/insertion-sort)
 
+### [Linked List](/algorithms/pages/linked-list)
+
 ### [Merge Sort](/algorithms/pages/mergesort)
 
 ### [Quick Sort](/algorithms/pages/quicksort)
