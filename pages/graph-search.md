@@ -62,5 +62,16 @@ class DepthFirstPaths {
   hasPathTo(vertex) {
     return this.visited[vertex];
   }
+  
+  pathTo(vertex) {
+    if (!hasPathTo(vertex)) { return null; }
+
+    path = [];
+    for (int i = vertex; i !== this.source; i = edgeTo[i]) {
+      path.push(i);
+    }
+    path.push(this.source);
+    return path;
+  }
 }
 ```
