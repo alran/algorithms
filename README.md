@@ -2,6 +2,8 @@
 
 ### [Bubble Sort](/algorithms/pages/bubble-sort)
 
+### [Graph Search](/algorithms/pages/graph-search)
+
 ### [Insertion Sort](/algorithms/pages/insertion-sort)
 
 ### [Linked List](/algorithms/pages/linked-list)
