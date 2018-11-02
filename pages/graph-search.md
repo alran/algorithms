@@ -31,8 +31,8 @@ class Graph {
 }
 ```
 
-In a directed graph, edges have direction. For example, a road network
-has one way and two way streets. This direction is important for 
+In a directed graph ("digraph"), edges have direction. For example, a road 
+network has one way and two way streets. This direction is important for 
 calculating a route from point A to point B.
 
 ```javascript
@@ -69,6 +69,8 @@ from point A to point B (solving mazes).
 It starts at the source node and recursively visits every connected 
 node. Along the way, it also keeps track of the last element that 
 it visited before arriving at the node (in the `edgeTo` array below)
+
+Note: DFS is the same in both directed and undirected graphs.
 
 ```javascript
 class DepthFirstPaths {
@@ -117,6 +119,8 @@ Uses a queue structure. Until the queue is empty, it removes a
 vertex from the queue, then adds to the queue all unmarked vertices
 adjacent to this queue. As it touches each vertex, it marks it as
 visited.
+
+Note: BFS is the same in both directed and undirected graphs.
 
 ```javascript
 class BreadthFirstPaths {
@@ -190,6 +194,57 @@ class ConnectedComponents {
 
   id(v) {
     return this.connectedComponents[v];
+  }
+}
+```
+
+# Topological Sort
+
+### Purpose
+Get the order of tasks that must be completed using 
+prescedence values (i.e. this one must be done before that
+one)
+
+### Summary
+Each vertex represends a task and each edge represents a 
+prescedence constraint. For example, classes that must be
+completed for a major cannot be completed in any order.
+To take class 1 or 2, you must complete class 0. But to
+take class 5, you must complete class 0, 2, and 3.
+
+A DAG is a directed graph with no cycles (circular paths).
+To sort topologically, the graph must be a DAG.
+
+First, run DFS. Then, return the vertices in reverse post
+order. Meaning, when you are done with a number (there is
+nothing else to explore that it is connected to), add it to
+a stack. At the end, this stack is the correct order.
+
+
+```javascript
+class TopologicalSort {
+  sort(graph) {
+    this.visited = [];
+    this.postOrder = [];
+
+    for (i = 0; i < graph.length; i++) {
+      if (!this.visited[i]) {
+        dfs(graph, i);
+      }
+    }
+
+    return this.postOrder;
+  }
+
+  dfs(graph, v) {
+    this.visited[i] = true;
+    graph[i].forEach(v => {
+      if (!this.visited[v]) {
+        dfs(graph, v);
+      }
+    })
+
+    this.postOrder.push(i)
   }
 }
 ```
