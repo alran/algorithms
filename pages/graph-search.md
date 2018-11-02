@@ -5,8 +5,8 @@ Find connections / paths between elements
 
 ### Summary
 A graph is a representation of the connections between some data. Below
-is a representation of a graph using javascript. It is instantiated with
-a number N vertices. Each vertex is represented by its index in the graph. 
+is a representation of an undirected graph using javascript. It is instantiated 
+with a number N vertices. Each vertex is represented by its index in the graph. 
 Each vertex is associated with an array of other vertices it is connected
 to (creating edges).
 
@@ -27,6 +27,34 @@ class Graph {
 
   addVertex(v) {
     this.graph[v] = [];
+  }
+}
+```
+
+In a directed graph, edges have direction. For example, a road network
+has one way and two way streets. This direction is important for 
+calculating a route from point A to point B.
+
+```javascript
+class DirectedGraph {
+  constructor(numVertices) {
+    this.graph = [];
+
+    for (i = 0; i < numVertices; i++) {
+      graph[i] = [];
+    }
+  }
+
+  addEdge(v, w) {
+    this.graph[v].push(w);
+  }
+
+  toString() {
+    for (int v = 0; v < this.graph.length; v++) {
+      this.graph[v].forEach(w => {
+        console.log(v, '-', w);
+      })
+    }
   }
 }
 ```
