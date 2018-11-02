@@ -35,10 +35,12 @@ class Graph {
 
 ### Purpose
 Depth first search is good at figuring out whether there is a path
-from point A to point B (solving mazes). It starts at the source
-node and recursively visits every connected node. Along the way,
-it also keeps track of the last element that it visited before
-arriving at the node (in the `edgeTo` array below)
+from point A to point B (solving mazes). 
+
+### Summary
+It starts at the source node and recursively visits every connected 
+node. Along the way, it also keeps track of the last element that 
+it visited before arriving at the node (in the `edgeTo` array below)
 
 ```javascript
 class DepthFirstPaths {
@@ -82,6 +84,12 @@ class DepthFirstPaths {
 Breadth first search is good at figuring out the shortest path
 from point A to point B.
 
+### Summary
+Uses a queue structure. Until the queue is empty, it removes a 
+vertex from the queue, then adds to the queue all unmarked vertices
+adjacent to this queue. As it touches each vertex, it marks it as
+visited.
+
 ```javascript
 class BreadthFirstPaths {
   constructor() {
@@ -104,6 +112,56 @@ class BreadthFirstPaths {
         }
       })
     }
+  }
+}
+```
+
+
+# Connected Components
+
+### Purpose
+Easily discover whether two vertices are connected. 
+
+### Summary
+Initialize all vertices as unmarked / unvisited. For each unmarked
+vertex, run DFS to discover all vertices in the same connected
+component. Store the id for this component with the vertex so that
+you can quickly look up whether two things have the same component id,
+and therefore, if they are connected.
+
+```javascript
+class ConnectedComponents {
+  constructor(graph, source) {
+    this.graph = graph;
+    this.visited = [];
+    this.connectedComponents = [];
+    this.count = 0;
+
+    for (i = 0; i < graph.length; i++) {
+      if (!this.visited[i]) {
+        this.dfs(i);
+        this.count++;
+      }
+    }
+  }
+
+  dfs(source, id) {
+    this.visited[source] = true;
+    this.connectedComponents[source] = this.count;
+
+    this.graph[source].forEach(v => {
+      if (!this.visited[v]) {
+        this.dfs(v);
+      }
+    })
+  }
+
+  count() {
+    return this.count;
+  }
+
+  id(v) {
+    return this.connectedComponents[v];
   }
 }
 ```
