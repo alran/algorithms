@@ -152,7 +152,7 @@ class BreadthFirstPaths {
 # Connected Components
 
 ### Purpose
-Easily discover whether two vertices are connected. 
+Easily discover whether two vertices in an *undirected* graph are connected. 
 
 ### Summary
 Initialize all vertices as unmarked / unvisited. For each unmarked
@@ -245,6 +245,53 @@ class TopologicalSort {
     })
 
     this.postOrder.push(i)
+  }
+}
+```
+
+# Strongly Connected Components
+
+### Purpose
+Discover whether two vertices in a *directed* graph are connected. 
+
+### Summary
+First compute the post order of the reversed graph (reverse all of
+the edges). Then, run the `ConnectedComponents` code. Instead of
+iterating through all the graph nodes, itierate through the post
+order of the reversed graph.
+
+```javascript
+class StrongConnectedComponentsDigraph {
+  constructor(graph, source) {
+    this.graph = graph;
+    this.visited = [];
+    this.connected = [];
+    this.count = 0;
+
+    // start difference
+    const reversePost = TopologicalSort.new().sort(graph.reverse());
+    reversePost.forEach(v => {
+    // end difference
+      if (!this.visited[v]) {
+        this.dfs(v);
+        this.count++;
+      }
+    })
+  }
+
+  dfs(source, id) {
+    this.visited[source] = true;
+    this.connected[source] = this.count;
+
+    this.graph[source].forEach(v => {
+      if (!this.visited[v]) {
+        this.dfs(v);
+      }
+    })
+  }
+
+  stronglyConnected(v, w) {
+    return this.connected[v] === this.connected[w];
   }
 }
 ```
