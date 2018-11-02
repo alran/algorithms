@@ -75,3 +75,35 @@ class DepthFirstPaths {
   }
 }
 ```
+
+# Breadth First Search (BFS)
+
+### Purpose
+Breadth first search is good at figuring out the shortest path
+from point A to point B.
+
+```javascript
+class BreadthFirstPaths {
+  constructor() {
+    this.marked = [];
+    this.edgeTo = [];
+  }
+
+  bfs(graph, source) {
+    let queue = [];
+    queue.unshift(source);
+    this.marked[source] = true;
+
+    while (queue.length !== 0) {
+      let vertex = queue.shift();
+      graph.graph[vertex].forEach(w => {
+        if (!this.marked[w]) {
+          queue.unshift(w);
+          this.marked[w] = true;
+          this.edgeTo[w] = vertex;
+        }
+      })
+    }
+  }
+}
+```
