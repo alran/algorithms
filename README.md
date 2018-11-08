@@ -10,6 +10,8 @@
 
 ### [Merge Sort](/algorithms/pages/mergesort)
 
+### [Priority Queue](/algorithms/pages/priority-queue)
+
 ### [Quick Sort](/algorithms/pages/quicksort)
 
 ### [Selection Sort](/algorithms/pages/selection-sort)
