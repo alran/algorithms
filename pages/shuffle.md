@@ -1,4 +1,4 @@
-# Shuffling
+# Shuffle
 
 ### Purpose
 
@@ -27,3 +27,30 @@ function kuthShuffle(items) {
 }
 
 ```
+
+# Pick Randomly
+
+### Purpose
+
+Randomly choose a set of m integers from an array
+
+### Summary
+
+Move the first m elements into another array. Loop through the rest of the
+original array starting at index m. Get a random number at each iteration.
+If rand is less than m, swap the element into the other array.
+
+```javascript
+function pickRandom(arr, m) {
+  const final = arr.slice(0, m);
+  for (let i = m; i < arr.length; i++) {
+    const rand = Math.floor(Math.random() * (i + 1));
+    if (rand < m) {
+      final[rand] = arr[i];
+    }
+  }
+
+  return final;
+}
+```
+
