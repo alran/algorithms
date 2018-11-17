@@ -10,44 +10,36 @@ too much overhead for small arrays
 ### Big O
 N log N
 
-### Ruby
+### Javascript
 
-```ruby
-class MergeSort
-  def sort(elements)
-    length = elements.length
+```javascript
+function merge(left, right) {
+  let ptr1 = 0;
+  let ptr2 = 0;
+  let final = [];
 
-    # split the array in half
-    halves = elements.each_slice((length/2.0).ceil).to_a
+  while (ptr1 < left.length || ptr2 < right.length) {
+    if (!right[ptr2] || (left[ptr1] && left[ptr1] < right[ptr2])) {
+      final.push(left[ptr1]);
+      ptr1++;
+    } else {
+      final.push(right[ptr2]);
+      ptr2++;
+    }
+  }
 
-    # sort the two arrays
-    sorted_halves = halves.map(&:sort)
+  return final;
+}
 
-    # instantiate a final array
-    final = []
+function mergeSort(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
 
-    # instantiate current pointers for all arrays (halves + final)
-    i = 0
-    j = 0
-    k = 0
+  const middle = Math.floor(length / 2);
+  const left = arr.slice(0, middle);
+  const right = arr.slice(middle);
 
-    until final.length == length
-      current1 = sorted_halves[0][i]
-      current2 = sorted_halves[1][j]
-
-      if current1 && (current2.nil? || current1 < current2)
-        final << current1
-        i += 1
-      else
-        final << current2
-        j += 1
-      end
-
-      k += 1
-    end
-
-    final
-  end
-end
-
+  return merge(mergeSort(left), mergeSort(right));
+}
 ```
